@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bitcoin Calculator</title>
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f7931a">
+</head>
+<body>
+  <h1 class="main-title">Calculadora de Satoshi</h1>
+
+  <div class="info-panel">
+    <label id="fiatUSD" class="fiat">1 BTC = x USD</label>
+    <label id="usdToDefaultCurrency" class="fiat">1 USD = x DIVISA</label>
+  </div>
+
+  <div class="tab-panel">
+    <div class="tab-buttons">
+      <button class="tab-button active" data-tab="crypto-to-fiat">De Bitcoin a Fiat</button>
+      <button class="tab-button" data-tab="fiat-to-crypto">De Fiat a Bitcoin</button>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane active" id="crypto-to-fiat">
+        <div class="container">
+          <div>
+            <label for="unidadSelector">Selecciona unidad:</label>
+            <select id="unidadSelector">
+            <option value="sats" selected>sats</option>
+            <option value="BTC">BTC</option>
+            
+            </select>
+         </div>
+      
+         <div>
+          <label for="amount">Ingresa cantidad:</label>
+          <input type="text" id="amount" placeholder="a convertir">
+         </div>
+         <div>
+          <label for="currencySelector">Selecciona la divisa:</label>
+          <select id="currencySelector">
+            <option value="USD" selected>USD - Dolar Americano</option>
+            <option value="COP">COP - Peso Colombiano </option>
+            <option value="ARS">ARS - Peso Argentino</option>
+            <option value="BOB">BOB - Peso Boliviano</option>
+            <option value="BRL">BRL - Real Brasileño</option>
+            <option value="CLP">CLP - Peso Chileno</option>
+            <option value="VES">VES - Bolívar Soberano</option>
+            
+            <option value="EUR">EUR - EURO </option>
+            <option value="GBP">GBP - Libra Esterlina</option>
+          </select>
+        </div>
+        <div>
+          <label id="resultado" class="hidden" for="fiatValueDivisa" >1 BTC = y DIVISA</label>
+        </div>
+        <hr/>
+        <div>
+          <label id="resultadoUSD" class="hidden" >1 BTC = x USD</label>
+        </div>
+        <div>
+          <label id="resultadoDivisa" class="hidden"  >1 BTC = y DIVISA</label>
+        </div>
+        <div>
+          <button id="btnConvertir">Convertir</button>    
+      
+          
+        </div>   
+          
+        </div>
+      </div>
+      <div class="tab-pane" id="fiat-to-crypto">
+        <div class="container">
+          <div>
+            <label for="fiatAmount">Ingresa cantidad:</label>
+            <input type="text" id="fiatAmount" placeholder="a convertir">
+          </div>
+          <div>
+            <label for="fiatCurrencySelector">Selecciona la divisa:</label>
+            <select id="fiatCurrencySelector">
+              <option value="USD" selected>USD - Dolar Americano</option>
+              <option value="COP">COP - Peso Colombiano </option>
+              <option value="ARS">ARS - Peso Argentino</option>
+              <option value="BOB">BOB - Peso Boliviano</option>
+              <option value="BRL">BRL - Real Brasileño</option>
+              <option value="CLP">CLP - Peso Chileno</option>
+              <option value="VES">VES - Bolívar Soberano</option>
+              
+              <option value="EUR">EUR - EURO </option>
+              <option value="GBP">GBP - Libra Esterlina</option>
+            </select>
+          </div>
+          <div>
+            <label for="cryptoUnitSelector">Selecciona unidad:</label>
+            <select id="cryptoUnitSelector">
+              <option value="sats" selected>sats</option>
+              <option value="BTC">BTC</option>
+            </select>
+          </div>
+          <hr/>
+          <div>
+            <label id="fiatToCryptoResult" class="hidden"></label>
+          </div>
+          <div>
+            <button id="btnConvertirFiat">Convertir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-footer-icons">
+      <button id="infoIconBtn" class="icon-button" title="Información">ℹ️</button>
+      <button id="settingsIconBtn" class="icon-button" title="Configuración">⚙️</button>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <p>Para la conversión de divisas se usa la API de yadio.io</p>
+      <p>Creé esta sencilla aplicación ya que ninguna de las calculadoras actuales cubria mis necesidades y la quise compartir con todos aquellos bitcoiners que la deseen usar.</p>
+      <p>Si te parece útil me puedes enviar una propina a la siguiente lightning address <span><strong>bitao7@blink.sv</strong></span> o en el siguiente enlace <a href="https://pay.blink.sv/bitao7" target="_blank"> Dejar propina </a></p>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h3>Configuración de Divisa por Defecto</h3>
+      <div class="default-currency-setting">
+        <label for="defaultCurrencySelector">Divisa por defecto para 1 USD:</label>
+        <select id="defaultCurrencySelector">
+          <!-- Options will be populated by JS -->
+        </select>
+      </div>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(function(){ console.log('Service Worker registrado'); })
+        .catch(function(e){ console.warn('Error al registrar Service Worker:', e); });
+    }
+  </script>
+
+</body>
+</html>
