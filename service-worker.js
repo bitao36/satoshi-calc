@@ -1,9 +1,9 @@
 const CACHE_NAME = "satoshi-calc-cache-v1";
 const URLS_TO_CACHE = [
   "/manifest.json",
-  "/satoshi-calc/index.html",
-  "/satoshi-calc/css/estilos.css",
-  "/satoshi-calc/js/script.js",
+  "/index.html",
+  "/css/estilos.css",
+  "/js/script.js",
   "/icons/icon-192.png",
   "/icons/icon-512.png"
 ];
